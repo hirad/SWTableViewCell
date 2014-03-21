@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61A33ADD18DBFD8B00E652E5 /* UIButton+SWTVCBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A33ADC18DBFD8B00E652E5 /* UIButton+SWTVCBlockAdditions.m */; };
+		61A33AE018DC0B0400E652E5 /* SWUtilityButtonDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A33ADF18DC0B0400E652E5 /* SWUtilityButtonDescriptor.m */; };
 		810308911846579B00C378F0 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 810308861846579B00C378F0 /* NSMutableArray+SWUtilityButtons.m */; };
 		810308921846579B00C378F0 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 810308881846579B00C378F0 /* SWCellScrollView.m */; };
 		810308931846579B00C378F0 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103088A1846579B00C378F0 /* SWLongPressGestureRecognizer.m */; };
@@ -34,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		61A33ADB18DBFD8B00E652E5 /* UIButton+SWTVCBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+SWTVCBlockAdditions.h"; sourceTree = "<group>"; };
+		61A33ADC18DBFD8B00E652E5 /* UIButton+SWTVCBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SWTVCBlockAdditions.m"; sourceTree = "<group>"; };
+		61A33ADE18DC0B0400E652E5 /* SWUtilityButtonDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonDescriptor.h; sourceTree = "<group>"; };
+		61A33ADF18DC0B0400E652E5 /* SWUtilityButtonDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonDescriptor.m; sourceTree = "<group>"; };
 		810308851846579B00C378F0 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
 		810308861846579B00C378F0 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		810308871846579B00C378F0 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
@@ -104,6 +110,10 @@
 				8103088E1846579B00C378F0 /* SWUtilityButtonTapGestureRecognizer.m */,
 				8103088F1846579B00C378F0 /* SWUtilityButtonView.h */,
 				810308901846579B00C378F0 /* SWUtilityButtonView.m */,
+				61A33ADB18DBFD8B00E652E5 /* UIButton+SWTVCBlockAdditions.h */,
+				61A33ADC18DBFD8B00E652E5 /* UIButton+SWTVCBlockAdditions.m */,
+				61A33ADE18DC0B0400E652E5 /* SWUtilityButtonDescriptor.h */,
+				61A33ADF18DC0B0400E652E5 /* SWUtilityButtonDescriptor.m */,
 			);
 			path = PodFiles;
 			sourceTree = "<group>";
@@ -251,8 +261,10 @@
 				810308961846579B00C378F0 /* SWUtilityButtonView.m in Sources */,
 				810308A5184D688D00C378F0 /* UMTableViewCell.m in Sources */,
 				810308941846579B00C378F0 /* SWTableViewCell.m in Sources */,
+				61A33AE018DC0B0400E652E5 /* SWUtilityButtonDescriptor.m in Sources */,
 				AF34B78517DEE2B800BD9082 /* ViewController.m in Sources */,
 				810308951846579B00C378F0 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
+				61A33ADD18DBFD8B00E652E5 /* UIButton+SWTVCBlockAdditions.m in Sources */,
 				810308931846579B00C378F0 /* SWLongPressGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,11 +350,13 @@
 		AF34B78917DEE2B900BD9082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hirad Motamed (U9W7ETYURQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SWTableViewCell/SWTableViewCell-Prefix.pch";
 				INFOPLIST_FILE = "SWTableViewCell/SWTableViewCell-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "18A1AAED-A6AB-437C-AA71-EE84321AE743";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -355,6 +369,7 @@
 				INFOPLIST_FILE = "SWTableViewCell/SWTableViewCell-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "18A1AAED-A6AB-437C-AA71-EE84321AE743";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

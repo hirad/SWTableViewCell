@@ -7,24 +7,54 @@
 //
 
 #import "NSMutableArray+SWUtilityButtons.h"
+#import "SWUtilityButtonDescriptor.h"
 
 @implementation NSMutableArray (SWUtilityButtons)
 
-- (void)sw_addUtilityButtonWithColor:(UIColor *)color title:(NSString *)title
+- (void)sw_addUtilityButtonWithType:(UIButtonType)buttonType
+                              color:(UIColor *)color
+                              title:(NSString *)title
+                         tapHandler:(SWUtilityButtonBlock)handlerBlock
 {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = color;
-    [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self addObject:button];
+    SWUtilityButtonDescriptor* buttonDescriptor = [SWUtilityButtonDescriptor new];
+    buttonDescriptor.buttonType = buttonType;
+    buttonDescriptor.title = title;
+    buttonDescriptor.color = color;
+    buttonDescriptor.tapHandler = handlerBlock;
+    
+    [self addObject:buttonDescriptor];
 }
 
-- (void)sw_addUtilityButtonWithColor:(UIColor *)color icon:(UIImage *)icon
+-(void)sw_addUtilityButtonWithType:(UIButtonType)buttonType
+                             color:(UIColor *)color
+                              icon:(UIImage *)icon
+                        tapHandler:(SWUtilityButtonBlock)handlerBlock
 {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = color;
-    [button setImage:icon forState:UIControlStateNormal];
-    [self addObject:button];
+    SWUtilityButtonDescriptor* buttonDescriptor = [SWUtilityButtonDescriptor new];
+    buttonDescriptor.buttonType = buttonType;
+    buttonDescriptor.icon = icon;
+    buttonDescriptor.color = color;
+    buttonDescriptor.tapHandler = handlerBlock;
+    
+    [self addObject:buttonDescriptor];
+}
+
+- (void)sw_addUtilityButtonWithColor:(UIColor *)color
+                               title:(NSString *)title
+{
+    [self sw_addUtilityButtonWithType:UIButtonTypeCustom
+                                color:color
+                                title:title
+                           tapHandler:nil];
+}
+
+- (void)sw_addUtilityButtonWithColor:(UIColor *)color
+                                icon:(UIImage *)icon
+{
+    [self sw_addUtilityButtonWithType:UIButtonTypeCustom
+                                color:color
+                                 icon:icon
+                           tapHandler:nil];
 }
 
 @end

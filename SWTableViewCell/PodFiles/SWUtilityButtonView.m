@@ -9,6 +9,14 @@
 #import "SWUtilityButtonView.h"
 #import "SWUtilityButtonTapGestureRecognizer.h"
 #import "SWConstants.h"
+#import "UIButton+SWTVCBlockAdditions.h"
+#import "SWUtilityButtonDescriptor.h"
+
+@interface SWUtilityButtonView ()
+
+@property (nonatomic, strong) NSArray* utilityButtonDescriptors;
+
+@end
 
 @implementation SWUtilityButtonView
 
@@ -19,7 +27,8 @@
     self = [super init];
     
     if (self) {
-        self.utilityButtons = utilityButtons;
+        self.utilityButtons = [NSMutableArray new];
+        self.utilityButtonDescriptors = utilityButtons;
         self.utilityButtonWidth = [self calculateUtilityButtonWidth];
         self.parentCell = parentCell;
         self.utilityButtonSelector = utilityButtonSelector;
@@ -33,7 +42,8 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        self.utilityButtons = utilityButtons;
+        self.utilityButtons = [NSMutableArray new];
+        self.utilityButtonDescriptors = utilityButtons;
         self.utilityButtonWidth = [self calculateUtilityButtonWidth];
         self.parentCell = parentCell;
         self.utilityButtonSelector = utilityButtonSelector;
@@ -63,17 +73,34 @@
 - (void)populateUtilityButtons
 {
     NSUInteger utilityButtonsCounter = 0;
-    for (UIButton *utilityButton in _utilityButtons)
+    for (SWUtilityButtonDescriptor* buttonDescriptor in _utilityButtonDescriptors)
     {
+        UIButton* utilityButton = [buttonDescriptor describedButton];
         CGFloat utilityButtonXCord = 0;
         if (utilityButtonsCounter >= 1) utilityButtonXCord = _utilityButtonWidth * utilityButtonsCounter;
         [utilityButton setFrame:CGRectMake(utilityButtonXCord, 0, _utilityButtonWidth, CGRectGetHeight(self.bounds))];
         [utilityButton setTag:utilityButtonsCounter];
-        SWUtilityButtonTapGestureRecognizer *utilityButtonTapGestureRecognizer = [[SWUtilityButtonTapGestureRecognizer alloc] initWithTarget:_parentCell
-                                                                                                                                      action:_utilityButtonSelector];
-        utilityButtonTapGestureRecognizer.buttonIndex = utilityButtonsCounter;
-        [utilityButton addGestureRecognizer:utilityButtonTapGestureRecognizer];
+        
+        if (buttonDescriptor.tapHandler == nil) {
+            SWUtilityButtonTapGestureRecognizer *utilityButtonTapGestureRecognizer =
+            [[SWUtilityButtonTapGestureRecognizer alloc] initWithTarget:_parentCell
+                                                                 action:_utilityButtonSelector];
+            utilityButtonTapGestureRecognizer.buttonIndex = utilityButtonsCounter;
+            [utilityButton addGestureRecognizer:utilityButtonTapGestureRecognizer];
+        }
+        else
+        {
+            SWButtonBlock tapHandlerBlock = ^(id sender)
+            {
+                buttonDescriptor.tapHandler(_parentCell, sender);
+            };
+            
+            [utilityButton addHandler:tapHandlerBlock
+                     forControlEvents:UIControlEventTouchUpInside];
+        }
+        
         [self addSubview: utilityButton];
+        [self.utilityButtons addObject:utilityButton];
         utilityButtonsCounter++;
     }
 }

@@ -164,13 +164,43 @@
 - (NSArray *)rightButtons
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                title:@"More"];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-                                                title:@"Delete"];
 
+    SWUtilityButtonBlock moreButtonBlock = ^(SWTableViewCell* cell, id sender) {
+        NSLog(@"More button was pressed");
+        UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello"
+                                                            message:@"More more more"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"cancel"
+                                                  otherButtonTitles:nil];
+        [alertTest show];
+        
+        [cell hideUtilityButtonsAnimated:YES];
+    };
+    
+    SWUtilityButtonBlock deleteButtonBlock = ^(SWTableViewCell* cell, id sender) {
+        // Delete button was pressed
+        NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+        
+        [_testArray[cellIndexPath.section] removeObjectAtIndex:cellIndexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
+                              withRowAnimation:UITableViewRowAnimationLeft];
+    };
+    
+    [rightUtilityButtons sw_addUtilityButtonWithType:UIButtonTypeSystem
+                                               color:[UIColor colorWithRed:0.78f
+                                                                     green:0.78f
+                                                                      blue:0.8f
+                                                                     alpha:1.0]
+                                               title:@"More"
+                                          tapHandler:moreButtonBlock];
+    [rightUtilityButtons sw_addUtilityButtonWithType:UIButtonTypeSystem
+                                               color:[UIColor colorWithRed:1.0f
+                                                                     green:0.231f
+                                                                      blue:0.188
+                                                                     alpha:1.0f]
+                                               title:@"Delete"
+                                          tapHandler:deleteButtonBlock];
+    
     return rightUtilityButtons;
 }
 
@@ -229,23 +259,16 @@
 }
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    NSLog(@"You'll never see this now that we have blocks ;)");
     switch (index) {
         case 0:
         {
-            NSLog(@"More button was pressed");
-            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
-            [alertTest show];
-        
-            [cell hideUtilityButtonsAnimated:YES];
+            
             break;
         }
         case 1:
         {
-            // Delete button was pressed
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             
-            [_testArray[cellIndexPath.section] removeObjectAtIndex:cellIndexPath.row];
-            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
             break;
         }
         default:

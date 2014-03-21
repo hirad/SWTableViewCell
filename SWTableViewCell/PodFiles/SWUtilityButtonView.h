@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 @class SWTableViewCell;
 
+typedef void (^SWUtilityButtonBlock)(SWTableViewCell* cell, id sender);
+
 @interface SWUtilityButtonView : UIView
 
-@property (nonatomic, strong) NSArray *utilityButtons;
+@property (nonatomic, strong) NSMutableArray *utilityButtons;
 @property (nonatomic) CGFloat utilityButtonWidth;
 @property (nonatomic, weak) SWTableViewCell *parentCell;
 @property (nonatomic) SEL utilityButtonSelector;
