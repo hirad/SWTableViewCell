@@ -108,6 +108,7 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(scrollViewUp:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
+    tapGestureRecognizer.delegate = self;
     [cellScrollView addGestureRecognizer:tapGestureRecognizer];
     
     self.tapGestureRecognizer = tapGestureRecognizer;
@@ -236,6 +237,7 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
 
 - (void)scrollViewUp:(id)sender
 {
+    NSLog(@"Cell tap recognizer");
     [self selectCellWithTimedHighlight];
 }
 
@@ -294,6 +296,20 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
 {
     self.showingSelection = NO;
     [self setSelected:NO];
+}
+
+#pragma mark UIGestureRecognizer Delegate
+
+// This stops our cell's tap recognizer from blocking interactions with the utility buttons
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+      shouldReceiveTouch:(UITouch *)touch
+{
+    NSLog(@"Touch view is %@", touch.view);
+    if ([touch.view isKindOfClass:[UIButton class]]) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark UITableViewCell overrides

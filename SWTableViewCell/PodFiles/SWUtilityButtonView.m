@@ -101,6 +101,7 @@
         
         [self addSubview: utilityButton];
         [self.utilityButtons addObject:utilityButton];
+        
         utilityButtonsCounter++;
     }
 }

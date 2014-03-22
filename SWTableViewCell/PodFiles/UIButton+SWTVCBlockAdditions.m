@@ -46,10 +46,6 @@ static char kButtonHandlerKey;
 	self.handler(sender);
 }
 
-- (void)dealloc {
-	self.handler = nil;
-}
-
 @end
 
 #pragma mark -
